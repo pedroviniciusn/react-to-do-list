@@ -1,0 +1,30 @@
+.container {
+  max-width: 1480px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerContent {
+  max-width: 800px;
+  max-height: auto;
+  height: 360px;
+
+  background-color: var(--white);
+
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.2rem;
+}
+
+.header {
+  border-bottom: 0.1rem solid var(--text-secondary);
+
+  .headerContent {
+    padding: 2rem;
+
+    :first-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

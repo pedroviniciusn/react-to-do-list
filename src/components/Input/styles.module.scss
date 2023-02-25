@@ -1,0 +1,10 @@
+input {
+  width: 500px;
+  height: 23px;
+  border: none;
+  outline-color: #48D1CC;
+
+  &::placeholder {
+    color: var(--text-secondary)
+  }
+}
