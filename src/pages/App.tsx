@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
-import { Input } from '../components/Input';
+import { Button } from '../components/Button';
+import { Info } from '../components/Info';
+import { Input } from "../components/Input";
+import { Todo } from "../components/Todo";
 import { getTodos } from "../services/hooks/useTodos";
 import styles from "./App.module.scss";
 
 function App() {
+  function handleButton() {
+    
+  }
   useEffect(() => {
     async function get() {
       const todos = await getTodos();
@@ -19,11 +25,24 @@ function App() {
         <header className={styles.header}>
           <div className={styles.headerContent}>
             <h1>My checklist</h1>
-            <Input placeholder='Add any description...' type='text' />
+            <Input placeholder="Add any description..." type="text" />
           </div>
         </header>
         <main className="containerContent">
-          <Input placeholder='Title...' type='text'/>
+          <div className={styles.todos}>
+            <Todo />
+            <Todo />
+            <Todo />
+            <Todo />
+          </div>
+          <div className={styles.infoAndButton}>
+            <div className={styles.infoContainer}>
+              <Info done={0} quantity={1}/>
+            </div>
+            <div className={styles.buttonContainer}>
+              <Button handleButton={handleButton}/>
+            </div>
+          </div>
         </main>
       </section>
     </div>

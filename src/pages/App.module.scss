@@ -7,9 +7,8 @@
 }
 
 .containerContent {
-  max-width: 800px;
-  max-height: auto;
-  height: 360px;
+  width: 650px;
+  height: auto;
 
   background-color: var(--white);
 
@@ -28,3 +27,44 @@
     }
   }
 }
+
+.todos {
+  :first-child {
+    padding-top: 2rem;
+  }
+
+  :nth-child(even) {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.infoAndButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  height: 4rem;
+
+  padding: 0 2rem 0 2rem;
+
+  border-top: 0.1rem solid var(--text-secondary);
+
+  .infoContainer {
+    width: 10rem;
+    flex-grow: 1;
+
+    cursor: pointer;
+
+    :hover {
+      background: var(--background);
+    }
+  }
+
+  .buttonContainer {
+    :hover {
+      background: var(--background);
+    }
+  }
+}
+

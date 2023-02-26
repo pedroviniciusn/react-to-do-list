@@ -4,7 +4,12 @@ input {
   border: none;
   outline-color: #48D1CC;
 
+
   &::placeholder {
     color: var(--text-secondary)
+  }
+
+  &:focus {
+    color: black;
   }
 }

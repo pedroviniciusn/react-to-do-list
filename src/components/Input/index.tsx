@@ -1,10 +1,12 @@
+import { InputHTMLAttributes } from 'react';
+
 import styles from "./styles.module.scss"
 
-interface InputProps {
-  placeholder: string;
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  placeholder?: string;
   type: string;
 }
 
-export function Input({ placeholder = "", type = "" }: InputProps) {
-  return <input className={styles.input} placeholder={placeholder} type={type} />;
+export function Input({ placeholder = "", type = "" , ...rest}: InputProps) {
+  return <input className={styles.input} placeholder={placeholder} type={type} {...rest}/>;
 }
