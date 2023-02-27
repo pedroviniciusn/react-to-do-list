@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from '../components/Button';
 import { Info } from '../components/Info';
 import { Input } from "../components/Input";
@@ -7,9 +7,20 @@ import { getTodos } from "../services/hooks/useTodos";
 import styles from "./App.module.scss";
 
 function App() {
+  const [isVisibleDone, setIsVisibleDone] = useState(false);
+
+  function handleIsVisibleDone() {
+    if (!isVisibleDone) {
+      setIsVisibleDone(true);
+    } else {
+      setIsVisibleDone(false);
+    }
+  }
+
   function handleButton() {
     
   }
+
   useEffect(() => {
     async function get() {
       const todos = await getTodos();
@@ -36,8 +47,8 @@ function App() {
             <Todo />
           </div>
           <div className={styles.infoAndButton}>
-            <div className={styles.infoContainer}>
-              <Info done={0} quantity={1}/>
+            <div className={styles.infoContainer} onClick={handleIsVisibleDone}>
+              <Info done={0} quantity={1} isVisible={isVisibleDone}/>
             </div>
             <div className={styles.buttonContainer}>
               <Button handleButton={handleButton}/>

@@ -8,10 +8,19 @@ interface InfoProps {
 }
 
 export function Info({done = 0, quantity = 0, isVisible = false}: InfoProps) {
-  if (quantity !== 0) {
+  if (quantity !== 0 && isVisible) {
     return (
       <div className={styles.info}> 
         <RxEyeOpen size="16px" />
+        <span>Completed {done} of {quantity}</span>
+      </div>
+    )
+  }
+
+  if (quantity !== 0 && !isVisible) {
+    return (
+      <div className={styles.info}> 
+        <RxEyeClosed size="16px" />
         <span>Completed {done} of {quantity}</span>
       </div>
     )
