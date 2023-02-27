@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./pages/App";
+import { TodoProvider } from './contexts/TodoContext';
 import reportWebVitals from "./reportWebVitals";
 import { makeServer } from './services/mirage';
 import "./styles/global.scss";
@@ -13,7 +14,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App />
+    <TodoProvider>
+      <App />
+    </TodoProvider>
   </React.StrictMode>
 );
 
