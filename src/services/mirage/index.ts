@@ -31,7 +31,7 @@ export function makeServer() {
           return "test description";
         },
         checked() {
-          return false;
+          return true;
         },
       }),
     },

@@ -9,11 +9,13 @@ interface ITodoProps {
 }
 
 interface IGetTodosResponse {
-  todos: ITodoProps[];
+  todos?: ITodoProps[];
+  todosDone?: ITodoProps[];
+  todosNotDone?: ITodoProps[];
 }
 
 interface TodoContextData {
-  handleGetTodos: () => Promise<IGetTodosResponse[] | undefined>;
+  handleGetTodos: () => Promise<IGetTodosResponse | undefined>;
   handleIsVisibleDone: () => void;
   isVisibleDone: boolean;
 }
@@ -31,9 +33,9 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
   };
 
   const handleGetTodos = async () => {
-    const todos = await getTodos();
+    const response = await getTodos();
 
-    return todos;
+    return response;
   };
   return (
     <TodoContext.Provider
