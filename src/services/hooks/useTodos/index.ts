@@ -3,7 +3,11 @@ import { api } from "../../api";
 interface ITodoProps {
   id: string;
   todo: string;
-  description: string;
+  checked: boolean;
+}
+
+interface ICreateTodo {
+  todo: string;
   checked: boolean;
 }
 
@@ -24,9 +28,20 @@ export async function getTodos(): Promise<IGetTodosResponse | undefined> {
       todosDone,
       todosNotDone,
     };
-
     return response;
   } catch (error) {
-    console.log(error);
+      console.log(error);
+  }
+}
+
+export async function postTodo(data: ICreateTodo): Promise<void> {
+  try {
+    await api.post("/todos", {
+      todo: {
+        ...data,
+      }
+    });
+  } catch (error) {
+      console.log(error)
   }
 }

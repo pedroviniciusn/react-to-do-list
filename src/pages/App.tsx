@@ -10,15 +10,15 @@ function App() {
   const [todos, setTodos] = useState<any>([]);
   const [todosDone, setTodosDone] = useState<any>([]);
   const [todosNotDone, setTodosNotDone] = useState<any>([]);
-  const [addTodo, setAddTodo] = useState(false);
 
-  const { handleGetTodos, handleIsVisibleDone, isVisibleDone } = useContext(TodoContext);
-
-  function handleButton() {
-    if (!addTodo) {
-      setAddTodo(true);
-    }
-  }
+  const {
+    handleGetTodos,
+    isReload,
+    handleIsVisibleDone,
+    isVisibleDone,
+    handleAddTodo,
+    addTodo,
+  } = useContext(TodoContext);
 
   useEffect(() => {
     async function get() {
@@ -29,7 +29,7 @@ function App() {
     }
 
     get();
-  }, [handleGetTodos]);
+  }, [handleGetTodos, isReload]);
 
   return (
     <div className={styles.container}>
@@ -42,13 +42,12 @@ function App() {
         </header>
         <main className="containerContent">
           <div className={styles.todos} id="todoContainer">
-            { isVisibleDone
+            {isVisibleDone
               ? todos?.map((item: any) => {
                   return (
                     <Todo
                       checked={item.checked}
                       id={item.id}
-                      description={item.description}
                       todo={item.todo}
                       key={item.id}
                     />
@@ -59,7 +58,6 @@ function App() {
                     <Todo
                       checked={item.checked}
                       id={item.id}
-                      description={item.description}
                       todo={item.todo}
                       key={item.id}
                     />
@@ -69,10 +67,10 @@ function App() {
           </div>
           <div className={styles.infoAndButton}>
             <div className={styles.infoContainer} onClick={handleIsVisibleDone}>
-              <Info done={todosDone.length} quantity={todosDone.length} />
+              <Info done={todosDone.length} quantity={todos.length} />
             </div>
             <div className={styles.buttonContainer}>
-              <Button handleButton={handleButton} />
+              <Button handleButton={handleAddTodo} />
             </div>
           </div>
         </main>

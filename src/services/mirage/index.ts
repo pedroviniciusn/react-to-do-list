@@ -8,7 +8,6 @@ import {
 
 interface ITodo {
   todo: string;
-  description: string;
   checked: boolean;
 };
 
@@ -26,9 +25,6 @@ export function makeServer() {
       todo: Factory.extend({
         todo() {
           return "test";
-        },
-        description() {
-          return "test description";
         },
         checked() {
           return true;
@@ -48,6 +44,8 @@ export function makeServer() {
         
         return new Response(200, { todos });
       });
+
+      this.post("api/todos")
       
       this.passthrough();
     },
