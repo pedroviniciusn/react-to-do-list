@@ -45,7 +45,9 @@ export function makeServer() {
         return new Response(200, { todos });
       });
 
-      this.post("api/todos")
+      this.post("api/todos");
+
+      this.patch("api/todos/:id");
       
       this.passthrough();
     },

@@ -15,12 +15,12 @@ export function Todo({ checked, id, todo }: TodoProps) {
   const [todoData, setTodoData] = useState("");
   const [checkedTodo, setCheckedTodo] = useState(false);
 
-  const {handlePostTodo} = useContext(TodoContext);
+  const {handlePostTodo, handleEditTodo} = useContext(TodoContext);
 
   if (todo) {
     return (
-      <div className={styles.todo} id={id} key={id}>
-        <Input type="checkbox" />
+      <div className={styles.todo} id={id}>
+        <Input type="checkbox" onClick={() => handleEditTodo({id, todo, checked: checked === false ? true : false})} checked={checked} readOnly/>
         <Input type="text" placeholder="Title..." value={todo} disabled={true}/>
         <RxHamburgerMenu />
       </div>
@@ -29,7 +29,7 @@ export function Todo({ checked, id, todo }: TodoProps) {
 
   return (
     <div className={styles.addTodo}>
-      <Input type="checkbox" onChange={(e) => setCheckedTodo(e.target.checked)}/>
+      <Input type="checkbox" defaultChecked={false} onChange={(e) => setCheckedTodo(e.target.checked)} readOnly/>
       <Input type="text" placeholder="Title..." onChange={(e) => setTodoData(e.target.value)} />
       <RxPlus onClick={() => handlePostTodo({todo: todoData, checked: checkedTodo})} />
     </div> 

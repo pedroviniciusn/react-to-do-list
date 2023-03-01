@@ -11,6 +11,12 @@ interface ICreateTodo {
   checked: boolean;
 }
 
+interface IEditTodo {
+  id?: string;
+  todo?: string;
+  checked?: boolean;
+}
+
 interface IGetTodosResponse {
   todos: ITodoProps[];
   todosDone: ITodoProps[];
@@ -30,7 +36,7 @@ export async function getTodos(): Promise<IGetTodosResponse | undefined> {
     };
     return response;
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 }
 
@@ -39,9 +45,21 @@ export async function postTodo(data: ICreateTodo): Promise<void> {
     await api.post("/todos", {
       todo: {
         ...data,
-      }
+      },
     });
   } catch (error) {
-      console.log(error)
+    console.log(error);
+  }
+}
+
+export async function editTodo(data: IEditTodo): Promise<void> {
+  try {
+    await api.patch(`/todos/${data.id}`, {
+      todo: {
+        ...data,
+      },
+    });
+  } catch (error) {
+    console.log(error);
   }
 }

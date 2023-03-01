@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { getTodos, postTodo } from "../services/hooks/useTodos";
+import { editTodo, getTodos, postTodo } from "../services/hooks/useTodos";
 
 interface ITodoProps {
   id: string;
@@ -10,6 +10,12 @@ interface ITodoProps {
 interface ICreateTodo {
   todo: string;
   checked: boolean;
+}
+
+interface IEditTodo {
+  id?: string;
+  todo?: string;
+  checked?: boolean;
 }
 
 interface IGetTodosResponse {
@@ -23,6 +29,7 @@ interface TodoContextData {
   handlePostTodo: ({ todo, checked }: ICreateTodo) => void;
   handleIsVisibleDone: () => void;
   handleAddTodo: () => void;
+  handleEditTodo: ({ id, checked, todo }: IEditTodo) => void;
   isVisibleDone: boolean;
   isReload: boolean;
   addTodo: boolean;
@@ -34,7 +41,7 @@ interface TodoProviderProps {
 export const TodoContext = createContext({} as TodoContextData);
 
 export const TodoProvider = ({ children }: TodoProviderProps) => {
-  const [isVisibleDone, setIsVisibleDone] = useState(false);
+  const [isVisibleDone, setIsVisibleDone] = useState(true);
   const [isReload, setIsReload] = useState(false);
   const [addTodo, setAddTodo] = useState(false);
 
@@ -44,7 +51,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
 
   const handleAddTodo = () => {
     setAddTodo(true);
-  }
+  };
 
   const handleGetTodos = async () => {
     const response = await getTodos();
@@ -56,7 +63,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
 
   const handlePostTodo = async ({ todo, checked }: ICreateTodo) => {
     if (todo === "") {
-      return 
+      return;
     }
 
     await postTodo({
@@ -65,6 +72,12 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     });
 
     setAddTodo(false);
+    setIsReload(true);
+  };
+
+  const handleEditTodo = async (data: IEditTodo) => {
+    await editTodo(data);
+
     setIsReload(true);
   };
 
@@ -78,6 +91,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
         isReload,
         handleAddTodo,
         addTodo,
+        handleEditTodo,
       }}
     >
       {children}
