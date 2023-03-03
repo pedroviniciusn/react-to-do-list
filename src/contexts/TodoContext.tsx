@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { editTodo, getTodos, postTodo } from "../services/hooks/useTodos";
+import { deleteTodo, editTodo, getTodos, postTodo } from "../services/hooks/useTodos";
 
 interface ITodoProps {
   id: string;
@@ -30,6 +30,9 @@ interface TodoContextData {
   handleIsVisibleDone: () => void;
   handleAddTodo: () => void;
   handleEditTodo: ({ id, checked, todo }: IEditTodo) => void;
+  handleEditButton: () => void;
+  handleDeleteTodo: (id: string) => void;
+  disableEditTodo: boolean;
   isVisibleDone: boolean;
   isReload: boolean;
   addTodo: boolean;
@@ -44,6 +47,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
   const [isVisibleDone, setIsVisibleDone] = useState(true);
   const [isReload, setIsReload] = useState(false);
   const [addTodo, setAddTodo] = useState(false);
+  const [disableEditTodo, setDisableEditTodo] = useState(true);
 
   const handleIsVisibleDone = () => {
     setIsVisibleDone(isVisibleDone === false ? true : false);
@@ -61,7 +65,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     return response;
   };
 
-  const handlePostTodo = async ({ todo, checked }: ICreateTodo) => {
+  const handlePostTodo = async ({ todo, checked }: ICreateTodo): Promise<void> => {
     if (todo === "") {
       return;
     }
@@ -75,11 +79,21 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     setIsReload(true);
   };
 
-  const handleEditTodo = async (data: IEditTodo) => {
+  const handleEditTodo = async (data: IEditTodo): Promise<void> => {
     await editTodo(data);
 
+    setDisableEditTodo(true);
     setIsReload(true);
   };
+
+  const handleEditButton = () => {
+    setAddTodo(false);
+  };
+
+  const handleDeleteTodo = async (id: string): Promise<void> => {
+    await deleteTodo(id);
+    setIsReload(true);
+  }
 
   return (
     <TodoContext.Provider
@@ -92,6 +106,9 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
         handleAddTodo,
         addTodo,
         handleEditTodo,
+        handleEditButton,
+        disableEditTodo,
+        handleDeleteTodo,
       }}
     >
       {children}

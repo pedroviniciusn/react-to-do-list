@@ -63,3 +63,11 @@ export async function editTodo(data: IEditTodo): Promise<void> {
     console.log(error);
   }
 }
+
+export async function deleteTodo(id: string): Promise<void> {
+  try {
+    await api.delete(`/todos/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+}

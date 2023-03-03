@@ -48,6 +48,8 @@ export function makeServer() {
       this.post("api/todos");
 
       this.patch("api/todos/:id");
+
+      this.delete("api/todos/:id");
       
       this.passthrough();
     },

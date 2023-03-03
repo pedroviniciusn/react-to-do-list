@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   
-  padding: 0 2rem 2rem 2rem;
+  padding: 0 2rem 1rem 2rem;
 
   :first-child {
     width: 1rem;
@@ -43,5 +43,26 @@
     width: 2rem;
     cursor: pointer;
     margin-bottom: 0.5rem;
+  }
+}
+
+.options {
+  width: 3.5rem !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .edit {
+    padding: 0!important;   
+    font-size: 1.3rem;
+    cursor: pointer;
+    // margin-bottom: 0.5rem;
+  }
+
+  .delete {
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-top: 0.5rem;
   }
 }
