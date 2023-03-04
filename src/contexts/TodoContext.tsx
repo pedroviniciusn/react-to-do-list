@@ -1,5 +1,10 @@
 import { createContext, ReactNode, useState } from "react";
-import { deleteTodo, editTodo, getTodos, postTodo } from "../services/hooks/useTodos";
+import {
+  deleteTodo,
+  editTodo,
+  getTodos,
+  postTodo,
+} from "../services/hooks/useTodos";
 
 interface ITodoProps {
   id: string;
@@ -30,7 +35,8 @@ interface TodoContextData {
   handleIsVisibleDone: () => void;
   handleAddTodo: () => void;
   handleEditTodo: ({ id, checked, todo }: IEditTodo) => void;
-  handleEditButton: () => void;
+  handleEditButton: (id: string) => void;
+  taskIdEdit: string;
   handleDeleteTodo: (id: string) => void;
   disableEditTodo: boolean;
   isVisibleDone: boolean;
@@ -48,6 +54,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
   const [isReload, setIsReload] = useState(false);
   const [addTodo, setAddTodo] = useState(false);
   const [disableEditTodo, setDisableEditTodo] = useState(true);
+  const [taskIdEdit, setTaskIdEdit] = useState("");
 
   const handleIsVisibleDone = () => {
     setIsVisibleDone(isVisibleDone === false ? true : false);
@@ -65,7 +72,10 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     return response;
   };
 
-  const handlePostTodo = async ({ todo, checked }: ICreateTodo): Promise<void> => {
+  const handlePostTodo = async ({
+    todo,
+    checked,
+  }: ICreateTodo): Promise<void> => {
     if (todo === "") {
       return;
     }
@@ -83,17 +93,20 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     await editTodo(data);
 
     setDisableEditTodo(true);
+    setDisableEditTodo(true);
+    setTaskIdEdit("");
     setIsReload(true);
   };
 
-  const handleEditButton = () => {
-    setAddTodo(false);
+  const handleEditButton = (id: string) => {
+    setTaskIdEdit(id);
+    setDisableEditTodo(false);
   };
 
   const handleDeleteTodo = async (id: string): Promise<void> => {
     await deleteTodo(id);
     setIsReload(true);
-  }
+  };
 
   return (
     <TodoContext.Provider
@@ -109,6 +122,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
         handleEditButton,
         disableEditTodo,
         handleDeleteTodo,
+        taskIdEdit,
       }}
     >
       {children}

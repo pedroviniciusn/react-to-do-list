@@ -22,7 +22,7 @@
   }
 }
 
-.addTodo {
+.addTodo, .editTodo {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,7 +40,7 @@
 
   :last-child {
     font-size: 1.3rem;
-    width: 2rem;
+    width: 3.5rem;
     cursor: pointer;
     margin-bottom: 0.5rem;
   }
@@ -57,7 +57,6 @@
     padding: 0!important;   
     font-size: 1.3rem;
     cursor: pointer;
-    // margin-bottom: 0.5rem;
   }
 
   .delete {
