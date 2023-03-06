@@ -42,28 +42,42 @@ function App() {
         </header>
         <main className="containerContent">
           <div className={styles.todos} id="todoContainer">
-            {isVisibleDone
-              ? todos?.map((item: any) => {
-                  return (
-                    <Todo
-                      checked={item.checked}
-                      id={item.id}
-                      todo={item.todo}
-                      key={item.id}
-                    />
-                  );
-                })
-              : todosNotDone?.map((item: any) => {
-                  return (
-                    <Todo
-                      checked={item.checked}
-                      id={item.id}
-                      todo={item.todo}
-                      key={item.id}
-                    />
-                  );
-                })}
-            {addTodo && <Todo />}
+            {todos.length === 0 && !addTodo ? (
+              <div className={styles.question}>
+                <span>What is your next challenge?</span>
+              </div>
+            ) : isVisibleDone ? (
+              todos?.map((item: any) => {
+                return (
+                  <Todo
+                    checked={item.checked}
+                    id={item.id}
+                    todo={item.todo}
+                    key={item.id}
+                  />
+                );
+              })
+            ) : (
+              todosNotDone?.map((item: any) => {
+                return (
+                  <Todo
+                    checked={item.checked}
+                    id={item.id}
+                    todo={item.todo}
+                    key={item.id}
+                  />
+                );
+              })
+            )}
+            {addTodo && todos.length === 0 ? (
+              <Todo /> ? (
+                addTodo && <Todo />
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
           <div className={styles.infoAndButton}>
             <div className={styles.infoContainer} onClick={handleIsVisibleDone}>
