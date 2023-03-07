@@ -70,11 +70,9 @@ function App() {
               })
             )}
             {addTodo && todos.length === 0 ? (
-              <Todo /> ? (
-                addTodo && <Todo />
-              ) : (
-                ""
-              )
+              <Todo />
+            ) : addTodo && todos.length !== 0 ? (
+              <Todo />
             ) : (
               ""
             )}
