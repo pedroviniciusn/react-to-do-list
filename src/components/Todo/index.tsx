@@ -1,5 +1,11 @@
 import { Input } from "../Input";
-import { RxPlus, RxPencil2, RxTrash, RxPencil1 } from "react-icons/rx";
+import {
+  RxPlus,
+  RxPencil2,
+  RxTrash,
+  RxPencil1,
+  RxCross2,
+} from "react-icons/rx";
 
 import styles from "./styles.module.scss";
 import { useContext, useEffect, useState } from "react";
@@ -17,6 +23,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
 
   const {
     handlePostTodo,
+    handleCancelAddTodo,
     handleEditTodo,
     handleEditButton,
     disableEditTodo,
@@ -26,7 +33,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
 
   useEffect(() => {
     setTodoData(todo);
-  }, [todo])
+  }, [todo]);
 
   if (todo && id === taskIdEdit) {
     return (
@@ -50,10 +57,14 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
           onChange={(e) => setTodoData(e.target.value)}
           disabled={disableEditTodo}
         />
-        <RxPencil1 onClick={() => handleEditTodo({
-          id,
-          todo: todoData,
-        })}/>
+        <RxPencil1
+          onClick={() =>
+            handleEditTodo({
+              id,
+              todo: todoData,
+            })
+          }
+        />
       </div>
     );
   }
@@ -80,14 +91,8 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
           disabled={disableEditTodo}
         />
         <div className={styles.options}>
-          <RxPencil2
-            className={styles.edit}
-            onClick={() => handleEditButton(id as string)}
-          />
-          <RxTrash
-            className={styles.delete}
-            onClick={() => handleDeleteTodo(id as string)}
-          />
+          <RxPencil2 onClick={() => handleEditButton(id as string)} />
+          <RxTrash onClick={() => handleDeleteTodo(id as string)} />
         </div>
       </div>
     );
@@ -106,9 +111,14 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
         placeholder="Title..."
         onChange={(e) => setTodoData(e.target.value)}
       />
-      <RxPlus
-        onClick={() => handlePostTodo({ todo: todoData, checked: checkedTodo })}
-      />
+      <div className={styles.options}>
+        <RxPlus
+          onClick={() =>
+            handlePostTodo({ todo: todoData, checked: checkedTodo })
+          }
+        />
+        <RxCross2 onClick={() => handleCancelAddTodo()} />
+      </div>
     </div>
   );
 }

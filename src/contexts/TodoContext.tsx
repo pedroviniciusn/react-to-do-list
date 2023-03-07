@@ -34,6 +34,7 @@ interface TodoContextData {
   handlePostTodo: ({ todo, checked }: ICreateTodo) => void;
   handleIsVisibleDone: () => void;
   handleAddTodo: () => void;
+  handleCancelAddTodo: () => void;
   handleEditTodo: ({ id, checked, todo }: IEditTodo) => void;
   handleEditButton: (id: string) => void;
   taskIdEdit: string;
@@ -62,6 +63,10 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
 
   const handleAddTodo = () => {
     setAddTodo(true);
+  };
+
+  const handleCancelAddTodo = () => {
+    setAddTodo(false);
   };
 
   const handleGetTodos = async () => {
@@ -117,6 +122,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
         isVisibleDone,
         isReload,
         handleAddTodo,
+        handleCancelAddTodo,
         addTodo,
         handleEditTodo,
         handleEditButton,
