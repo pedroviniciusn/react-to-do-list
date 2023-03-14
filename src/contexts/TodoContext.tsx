@@ -37,6 +37,7 @@ interface TodoContextData {
   handleCancelAddTodo: () => void;
   handleEditTodo: ({ id, checked, todo }: IEditTodo) => void;
   handleEditButton: (id: string) => void;
+  handleCancelEditTodo: () => void;
   taskIdEdit: string;
   handleDeleteTodo: (id: string) => void;
   disableEditTodo: boolean;
@@ -98,9 +99,13 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     await editTodo(data);
 
     setDisableEditTodo(true);
-    setDisableEditTodo(true);
     setTaskIdEdit("");
     setIsReload(true);
+  };
+
+  const handleCancelEditTodo = () => {
+    setTaskIdEdit("");
+    setDisableEditTodo(true);
   };
 
   const handleEditButton = (id: string) => {
@@ -126,6 +131,7 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
         addTodo,
         handleEditTodo,
         handleEditButton,
+        handleCancelEditTodo,
         disableEditTodo,
         handleDeleteTodo,
         taskIdEdit,

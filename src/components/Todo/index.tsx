@@ -19,6 +19,7 @@ interface TodoProps {
 
 export function Todo({ checked, id, todo = "" }: TodoProps) {
   const [todoData, setTodoData] = useState("");
+  const [lastTodoData, setLastTodoData] = useState("");
   const [checkedTodo, setCheckedTodo] = useState(false);
 
   const {
@@ -27,12 +28,19 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
     handleEditTodo,
     handleEditButton,
     disableEditTodo,
+    handleCancelEditTodo,
     handleDeleteTodo,
     taskIdEdit,
   } = useContext(TodoContext);
 
+  const resetEditData = () => {
+    handleCancelEditTodo();
+    setTodoData(lastTodoData);
+  }
+
   useEffect(() => {
     setTodoData(todo);
+    setLastTodoData(todo);
   }, [todo]);
 
   if (todo && id === taskIdEdit) {
@@ -57,14 +65,17 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
           onChange={(e) => setTodoData(e.target.value)}
           disabled={disableEditTodo}
         />
-        <RxPencil1
-          onClick={() =>
-            handleEditTodo({
-              id,
-              todo: todoData,
-            })
-          }
-        />
+        <div className={styles.options}>
+          <RxPencil1
+            onClick={() =>
+              handleEditTodo({
+                id,
+                todo: todoData,
+              })
+            }
+          />
+          <RxCross2 onClick={() => resetEditData()} />
+        </div>
       </div>
     );
   }
