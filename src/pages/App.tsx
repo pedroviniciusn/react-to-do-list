@@ -37,7 +37,6 @@ function App() {
         <header className={styles.header}>
           <div className={styles.headerContent}>
             <h1>My checklist</h1>
-            <Input placeholder="Add any description..." type="text" />
           </div>
         </header>
         <main className="containerContent">
@@ -78,8 +77,12 @@ function App() {
             )}
           </div>
           <div className={styles.infoAndButton}>
-            <div className={styles.infoContainer} onClick={handleIsVisibleDone}>
-              <Info done={todosDone.length} quantity={todos.length} />
+            <div className={styles.infoContainer}>
+              <Info
+                done={todosDone.length}
+                quantity={todos.length}
+                onClick={handleIsVisibleDone}
+              />
             </div>
             <div className={styles.buttonContainer}>
               <Button handleButton={handleAddTodo} />

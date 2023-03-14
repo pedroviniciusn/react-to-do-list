@@ -21,10 +21,6 @@
 
   .headerContent {
     padding: 2rem;
-
-    :first-child {
-      margin-bottom: 0.5rem;
-    }
   }
 }
 
@@ -56,8 +52,6 @@
   .infoContainer {
     width: 10rem;
     flex-grow: 1;
-
-    cursor: pointer;
 
     :hover {
       background: var(--background);

@@ -35,16 +35,20 @@ export function makeServer() {
           return true;
         },
       }),
+      description: Factory.extend({
+        description() {
+          return "Test";
+        }
+      }),
     },
 
     seeds(server) {
       server.createList("todo", 2);
+      server.createList("description", 1);
     },
 
     routes() {
       this.namespace= "";
-
-      this.post("api/description");
       
       this.get("api/todos", function (this: any, schema, request) {
         const { todos } = this.serialize(schema.all("todo"));
