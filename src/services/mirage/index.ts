@@ -11,10 +11,6 @@ interface ITodo {
   checked: boolean;
 };
 
-interface IDescription {
-  description: string;
-}
-
 export function makeServer() {
   const server = createServer({
     serializers: {
@@ -23,7 +19,6 @@ export function makeServer() {
 
     models: {
       todo: Model.extend<Partial<ITodo>>({}),
-      description: Model.extend<Partial<IDescription>>({}),
     },
 
     factories: {
@@ -35,16 +30,10 @@ export function makeServer() {
           return true;
         },
       }),
-      description: Factory.extend({
-        description() {
-          return "Test";
-        }
-      }),
     },
 
     seeds(server) {
-      server.createList("todo", 2);
-      server.createList("description", 1);
+      server.createList("todo", 0);
     },
 
     routes() {
