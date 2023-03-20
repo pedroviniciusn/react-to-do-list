@@ -1,6 +1,5 @@
 import { render, screen } from "@testing-library/react";
 import { TodoProvider } from "../../contexts/TodoContext";
-import React from "react";
 import App from "../../pages/App";
 
 describe("App page", () => {

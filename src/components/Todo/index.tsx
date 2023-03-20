@@ -1,3 +1,5 @@
+import { useContext, useEffect, useState } from "react";
+import { TodoContext } from "../../contexts/TodoContext";
 import { Input } from "../Input";
 import {
   RxPlus,
@@ -8,8 +10,6 @@ import {
 } from "react-icons/rx";
 
 import styles from "./styles.module.scss";
-import { useContext, useEffect, useState } from "react";
-import { TodoContext } from "../../contexts/TodoContext";
 
 interface TodoProps {
   id?: string;
@@ -85,6 +85,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
       <div className={styles.todo} id={id}>
         <Input
           type="checkbox"
+          title="check"
           onClick={() =>
             handleEditTodo({
               id,
@@ -100,6 +101,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
           placeholder="Title..."
           value={todo}
           disabled={disableEditTodo}
+          readOnly
         />
         <div className={styles.options}>
           <RxPencil2 onClick={() => handleEditButton(id as string)} />
@@ -113,6 +115,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
     <div className={styles.addTodo}>
       <Input
         type="checkbox"
+        title="check"
         defaultChecked={false}
         onChange={(e) => setCheckedTodo(e.target.checked)}
         readOnly

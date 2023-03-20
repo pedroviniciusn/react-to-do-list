@@ -1,15 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Info } from "../components/Info";
 import { Todo } from "../components/Todo";
 import { TodoContext } from "../contexts/TodoContext";
-import { makeServer } from '../services/mirage';
 import styles from "./App.module.scss";
-
-if (process.env.NODE_ENV === "development") {
-  makeServer();
-  console.log("development")
-}
 
 function App() {
   const [todos, setTodos] = useState<any>([]);
