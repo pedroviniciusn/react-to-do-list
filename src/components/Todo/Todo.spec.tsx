@@ -7,7 +7,7 @@ interface inputProps {
 }
 
 describe("Todo Component", () => {
-  it("renders correctly", async () => {
+  it("renders correctly", () => {
     render(
       <Todo todo={"testing"} id={"1"} />
     );
@@ -19,7 +19,7 @@ describe("Todo Component", () => {
     expect(input.value).toEqual("testing");
   });
   
-  it("renders correctly if not passing todo value", async () => { 
+  it("renders correctly if not passing todo value", () => { 
     render(
       <Todo />
     );
@@ -29,7 +29,7 @@ describe("Todo Component", () => {
     expect(input.value).toEqual("");
   });
 
-  it("renders correctly if checked equals true", async () => { 
+  it("renders correctly if checked equals true", () => { 
     render(
       <Todo checked={true} todo={"testing"} id={"2"}/>
     );

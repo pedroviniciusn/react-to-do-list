@@ -5,8 +5,8 @@ import { TodoContext } from '../../contexts/TodoContext';
 import styles from "./styles.module.scss"
 
 interface InfoProps extends HTMLAttributes<HTMLDivElement> {
-  done?: number;
-  quantity?: number;
+  done: number;
+  quantity: number;
 }
 
 export function Info({done = 0, quantity = 0, ...rest}: InfoProps) {
