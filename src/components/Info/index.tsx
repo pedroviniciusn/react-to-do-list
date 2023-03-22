@@ -12,19 +12,10 @@ interface InfoProps extends HTMLAttributes<HTMLDivElement> {
 export function Info({done = 0, quantity = 0, ...rest}: InfoProps) {
   const { isVisibleDone } = useContext(TodoContext)
 
-  if (quantity !== 0 && isVisibleDone) {
+  if (quantity !== 0) {
     return (
       <div className={styles.info} {...rest}> 
-        <RxEyeOpen size="16px" />
-        <span>Completed {done} of {quantity}</span>
-      </div>
-    )
-  }
-
-  if (quantity !== 0 && !isVisibleDone) {
-    return (
-      <div className={styles.info} {...rest}> 
-        <RxEyeClosed size="16px" />
+        {isVisibleDone ? <RxEyeOpen size="16px" /> : <RxEyeClosed size="16px" />}
         <span>Completed {done} of {quantity}</span>
       </div>
     )

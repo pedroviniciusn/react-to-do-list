@@ -67,9 +67,7 @@ function App() {
                 );
               })
             )}
-            {addTodo && todos.length === 0 ? (
-              <Todo />
-            ) : addTodo && todos.length !== 0 ? (
+            {addTodo ? (
               <Todo />
             ) : (
               ""
