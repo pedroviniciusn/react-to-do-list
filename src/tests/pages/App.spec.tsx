@@ -3,13 +3,15 @@ import { TodoProvider } from "../../contexts/TodoContext";
 import App from "../../pages/App";
 
 describe("App page", () => {
-  it("renders correctly", async () => {
+  it("renders correctly", () => {
     render(
       <TodoProvider>
         <App />
       </TodoProvider>
     );
 
-    expect(screen.getByText("What is your next challenge?")).toBeInTheDocument();
+    expect(
+      screen.getByText("What is your next challenge?")
+    ).toBeInTheDocument();
   });
 });

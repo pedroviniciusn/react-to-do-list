@@ -1,13 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { TodoContext } from "../../contexts/TodoContext";
 import { Input } from "../Input";
-import {
-  RxPlus,
-  RxPencil2,
-  RxTrash,
-  RxPencil1,
-  RxCross2,
-} from "react-icons/rx";
+import { AiOutlinePlus } from "react-icons/ai";
+import { RxPencil2, RxTrash, RxPencil1, RxCross2 } from "react-icons/rx";
 
 import styles from "./styles.module.scss";
 
@@ -36,7 +31,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
   const resetEditData = () => {
     handleCancelEditTodo();
     setTodoData(lastTodoData);
-  }
+  };
 
   useEffect(() => {
     setTodoData(todo);
@@ -65,7 +60,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
           onChange={(e) => setTodoData(e.target.value)}
           disabled={disableEditTodo}
         />
-        <div className={styles.options}>
+        <div className={styles.optionsEditTrue}>
           <RxPencil1
             onClick={() =>
               handleEditTodo({
@@ -103,7 +98,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
           disabled={disableEditTodo}
           readOnly
         />
-        <div className={styles.options}>
+        <div className={styles.optionsEdit}>
           <RxPencil2 onClick={() => handleEditButton(id as string)} />
           <RxTrash onClick={() => handleDeleteTodo(id as string)} />
         </div>
@@ -126,7 +121,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
         onChange={(e) => setTodoData(e.target.value)}
       />
       <div className={styles.options}>
-        <RxPlus
+        <AiOutlinePlus
           onClick={() =>
             handlePostTodo({ todo: todoData, checked: checkedTodo })
           }
