@@ -36,7 +36,7 @@ export async function getTodos(): Promise<IGetTodosResponse | undefined> {
     };
     return response;
   } catch (error) {
-    console.log(error);
+    return;
   }
 }
 
@@ -48,7 +48,7 @@ export async function postTodo(data: ICreateTodo): Promise<void> {
       },
     });
   } catch (error) {
-    console.log(error);
+    return;
   }
 }
 
@@ -60,7 +60,7 @@ export async function editTodo(data: IEditTodo): Promise<void> {
       },
     });
   } catch (error) {
-    console.log(error);
+    return;
   }
 }
 
@@ -68,6 +68,6 @@ export async function deleteTodo(id: string): Promise<void> {
   try {
     await api.delete(`/todos/${id}`);
   } catch (error) {
-    console.log(error);
+    return;
   }
 }
