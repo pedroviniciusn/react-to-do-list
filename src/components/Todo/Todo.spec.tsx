@@ -11,7 +11,7 @@ describe("Todo Component", () => {
     render(<Todo todo={"testing"} id={"1"} />);
 
     const inputCheck = screen.getByTitle("check") as inputProps;
-    const input = screen.getByPlaceholderText("Title...") as inputProps;
+    const input = screen.getByPlaceholderText("Task...") as inputProps;
 
     expect(inputCheck.checked).toEqual(false);
     expect(input.value).toEqual("testing");
@@ -20,7 +20,7 @@ describe("Todo Component", () => {
   it("renders correctly if not passing todo value", async () => {
     render(<Todo />);
 
-    const input = screen.getByPlaceholderText("Title...") as inputProps;
+    const input = screen.getByPlaceholderText("Task...") as inputProps;
 
     expect(input.value).toEqual("");
   });

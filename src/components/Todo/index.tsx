@@ -55,7 +55,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
         />
         <Input
           type="text"
-          placeholder="Title..."
+          placeholder="Task..."
           value={todoData}
           onChange={(e) => setTodoData(e.target.value)}
           disabled={disableEditTodo}
@@ -93,7 +93,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
         />
         <Input
           type="text"
-          placeholder="Title..."
+          placeholder="Task..."
           value={todo}
           disabled={disableEditTodo}
           readOnly
@@ -117,7 +117,7 @@ export function Todo({ checked, id, todo = "" }: TodoProps) {
       />
       <Input
         type="text"
-        placeholder="Title..."
+        placeholder="Task..."
         onChange={(e) => setTodoData(e.target.value)}
       />
       <div className={styles.options}>
