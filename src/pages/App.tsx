@@ -25,6 +25,7 @@ function App() {
       setTodos(response?.todos);
       setTodosDone(response?.todosDone);
       setTodosNotDone(response?.todosNotDone);
+      console.error('teste')
     }
 
     get();
